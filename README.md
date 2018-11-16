@@ -101,8 +101,78 @@ private static void runMyUncheckedException() {
 
 
 ## New resources with Java 7
+### Multi Catch
+In Java 7 we can use the Multi-Catch with the pipe "|" operator. Example of use:
+```
+public class MutiCatchExample {
+
+	public void process() {
+		try {
+			execute();
+		} catch (ExampleOneException | ExampleTwoException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+
+	private void execute() throws ExampleTwoException {
+		if (new Random().nextBoolean()) {
+			throw new ExampleTwoException("Example two");
+		} else {
+			throw new ExampleOneException("Example one");
+		}
+
+	}
+}
+``` 
 
 ### Try With Resources
+In Java 7, we can use a new way to execute the finally instruction on our try-catch. Its only necessary to implement the interface AutoClosed in class that throw a exception. Example of use:`
 
-### Multi Catch
+Class that throw exception:
+```
+public class Connection implements AutoCloseable {
+	public void open() {
+		System.out.println("Starting the process...");
+	}
+
+	public void process() {
+		System.out.println("Process is running...");
+		throw new ConnectionException("Problems with connection!");
+	}
+
+	public void finish() {
+		System.out.println("Finishing the process");
+	}
+
+	public void close() throws ConnectionException {
+		System.out.println("Close...");
+		this.finish();
+	}
+}
+```
+Class that treat the exception:
+```
+public class ProcessConnection {
+	public void connect() {
+		try (Connection connection = new Connection()) {
+			connection.open();
+			connection.process();
+		}
+	}
+}
+```
+Stack of method error and console output:
+```
+Starting the process...
+Process is running...
+Close...
+Finishing the process
+Exception in thread "main" com.examples.java7.trywithresources.ConnectionException: Problems with connection!
+	at com.examples.java7.trywithresources.Connection.process(Connection.java:11)
+	at com.examples.java7.trywithresources.ProcessConnection.connect(ProcessConnection.java:9)
+	at com.examples.RunExamples.runTryWithResourcesExample(RunExamples.java:59)
+	at com.examples.RunExamples.main(RunExamples.java:27)
+```
+
+
 
