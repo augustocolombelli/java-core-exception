@@ -4,6 +4,7 @@ import com.examples.errors.StackOverFlowExample;
 import com.examples.exceptions.checked.IOExample;
 import com.examples.exceptions.checked.MyCheckedException;
 import com.examples.exceptions.unchecked.ArithmeticExample;
+import com.examples.exceptions.unchecked.MyUncheckedException;
 
 public class RunExamples {
 
@@ -11,12 +12,13 @@ public class RunExamples {
 //		runErrorStackOverFlowExample();
 //		runUncheckedExceptionArithmeticExample();
 //		runCheckedExceptionIOExample();
+		runMyUncheckedException();
 
-		try {
-			runMyCheckedException();
-		} catch (MyCheckedException ex) {
-			System.out.println(ex.getMessage());
-		}
+//		try {
+//			runMyCheckedException();
+//		} catch (MyCheckedException ex) {
+//			System.out.println(ex.getMessage());
+//		}
 	}
 
 	private static void runErrorStackOverFlowExample() {
@@ -36,6 +38,10 @@ public class RunExamples {
 
 	private static void runMyCheckedException() throws MyCheckedException {
 		throw new MyCheckedException("My checked exception!");
+	}
+	
+	private static void runMyUncheckedException() {
+		throw new MyUncheckedException("My uncheked exception");
 	}
 
 }

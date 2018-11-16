@@ -79,12 +79,24 @@ public void execute(){
 }
 
 private void runMyCheckedException() throws MyCheckedException {
-	throw new MyCheckedException("My checked exception!");
+  throw new MyCheckedException("My checked exception!");
 }
 ```
 
 Example of a new Unchecked Exception:
 ```
+public class MyUncheckedException extends RuntimeException {
+
+  public MyUncheckedException(String message) {
+    super(message);
+  }
+}
+```
+Example of use this exception:
+```
+private static void runMyUncheckedException() {
+  throw new MyUncheckedException("My uncheked exception");
+}
 ```
 
 
