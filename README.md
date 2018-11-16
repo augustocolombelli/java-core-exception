@@ -39,5 +39,58 @@ Exception in thread "main" java.lang.ArithmeticException: / by zero
 ```
 
 ## Checked and Unchecked
-There are two tips of exceptions, Unchecked and Checked.
+There are two tips of exceptions, Unchecked and Checked. Checked exceptions needs to explicit in signature method the exception that can throw. It is necessary in all methods until one of them treat the error. Unchecked exceptions is not necessary.
+In our code we have a example of a method that throw a checked exception. Some method needs to treat this exception or to push for the next method.
+```
+	public void process() {
+		try {
+			execute();
+		} catch (IOException ex) {
+			System.out.println("Error treatment");
+			ex.printStackTrace();
+		}
+	}
+
+	private void execute() throws IOException {
+		throw new IOException();
+	}
+```
+
+### Creating exceptions
+It is possible create our specific exceptions. Its very important know, Checked exceptions are subclasses of Exception. Unchecked exceptions are subclasses of RuntimeException. 
+
+Example of a new Checked Exception:
+```
+public class MyCheckedException extends Exception {
+
+	public MyCheckedException(String message) {
+		super(message);
+	}
+}
+```
+Example of use this exception:
+```
+public void execute(){
+  try {
+    runMyCheckedException();
+  } catch (MyCheckedException ex) {
+    System.out.println(ex.getMessage());
+  }
+}
+
+private void runMyCheckedException() throws MyCheckedException {
+	throw new MyCheckedException("My checked exception!");
+}
+```
+
+Example of a new Unchecked Exception:
+```
+```
+
+
+## New resources with Java 7
+
+### Try With Resources
+
+### Multi Catch
 
