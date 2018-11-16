@@ -1,16 +1,23 @@
 package com.examples;
 
-import com.examples.errors.ErrorExample;
+import com.examples.errors.StackOverFlowExample;
+import com.examples.exceptions.unchecked.ArithmeticExample;
 
 public class RunApp {
 
 	public static void main(String[] args) {
-		runErrorExample();
+//		runErrorStackOverFlowExample();
+		runUncheckedExceptionArithmeticExample();
 	}
 	
-	private static void runErrorExample() {
-		ErrorExample errorExample = new ErrorExample();
-		errorExample.executeMethodThatThrowError();
+	private static void runErrorStackOverFlowExample() {
+		StackOverFlowExample stackOverFlowExample = new StackOverFlowExample();
+		stackOverFlowExample.execute();
+	}
+	
+	private static void runUncheckedExceptionArithmeticExample() {
+		ArithmeticExample arithmeticExample = new ArithmeticExample();
+		arithmeticExample.execute();
 	}
 	
 }
